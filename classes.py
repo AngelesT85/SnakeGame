@@ -7,7 +7,7 @@ class Field:
 function print field
 change_snake - will objects of Snake print like 'class.__Snake__...' (change_snake = False)
                                         or
-                objects of Snake will printed like 'o'
+                objects of Snake will printed like 'o' (change_snake = True (by default))
         '''
         for i in self.field:
             for j in i:
