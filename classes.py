@@ -2,7 +2,10 @@ class Field:
     def __init__(self):
         self.field = [["-" for i in range(15)] for j in range(15)]
     
-    def PrintField(self):
+    def Print(self):
+        '''
+function print field
+        '''
         for i in self.field:
             for j in i:
 
