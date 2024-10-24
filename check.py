@@ -1,3 +1,7 @@
 from functions import *
 
-print(Snake.__init__.__doc__)
+field = Field()
+
+CreateSnake(field.field)
+
+field.PrintField()
