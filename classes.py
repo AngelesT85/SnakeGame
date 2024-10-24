@@ -2,15 +2,21 @@ class Field:
     def __init__(self):
         self.field = [["-" for i in range(15)] for j in range(15)]
     
-    def Print(self):
+    def Print(self, change_snake=True):
         '''
 function print field
+change_snake - will objects of Snake print like 'class.__Snake__...' (change_snake = False)
+                                        or
+                objects of Snake will printed like 'o'
         '''
         for i in self.field:
             for j in i:
-
+                
                 if isinstance(j, Snake):
-                    print("o", end=" ")
+                    if change_snake:
+                        print("o", end=" ")
+                    else:
+                        print(j, end=" ")
 
                 else:
                     print(j, end=" ")
