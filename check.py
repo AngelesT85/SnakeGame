@@ -4,4 +4,4 @@ field = Field()
 
 CreateSnake(field.field)
 
-field.PrintField()
+field.Print()
