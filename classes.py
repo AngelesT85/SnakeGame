@@ -7,22 +7,26 @@ class Field:
     def __init__(self):
         self.field = [["-" for i in range(15)] for j in range(15)]
     
-    def UpdateField(self):
+    def UpdateField(self) -> None:
+        '''
+        function update field after snake move
+        '''
         for segment in Snake.Segments:
             string = segment.coords[0]
             col = segment.coords[1]
             self.field[string][col] = segment
 
     
-    def Print(self, change_snake=True, change_food = True):
+    def Print(self, change_snake = True, change_food = True) -> None:
         '''
         function print field
         change_snake - will objects of Snake print like 'class.__Snake__...' (change_snake = False)
                                                 or
                         objects of Snake will printed like 'o' (change_snake = True (by default))
+
         change_food - will objects of Food print like 'class.__Food__...' (change_food = False)
                                                 or
-                        objects of Food will print like 'f' (change_food = True)
+                        objects of Food will print like 'f' (change_food = True (by default))
         '''
         for i in self.field:
             for j in i:
@@ -51,6 +55,10 @@ class Food:
         self.image = food[randint(0, 1)]
     
     def Spawn(self, field):
+        '''
+        function spawn food (apple or pear) on the field
+        field - field for comp (you can watch it if turn it in settings.json)
+        '''
         while True:
             string = randint(0, 14)
             col = randint(0, 14)
