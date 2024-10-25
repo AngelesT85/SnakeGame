@@ -23,7 +23,7 @@ def Snake():
     screen.fill((255, 255, 255))
     screen.blit(FieldImg, (0, 0))
 
-    draw_snake()
+    draw_snake(screen)
     
     is_game = True
 
