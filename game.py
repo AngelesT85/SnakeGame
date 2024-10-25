@@ -23,12 +23,18 @@ def Snake():
     screen = pg.display.set_mode((912, 912))
     screen.fill((255, 255, 255))
     screen.blit(FieldImg, (0, 0))
-    screen.blit(Start, (0, 0))
 
     
     is_game = True
+    game_start = False
 
     while is_game:
+        if game_start:
+            food = Food()
+            food.Spawn(field.field)
+        else:
+            screen.blit(Start, (0, 0))
+
         DrawSnake(screen, field.field)
         DrawFood(screen, field.field)
         for event in pg.event.get():
@@ -38,9 +44,10 @@ def Snake():
             elif event.type == pg.MOUSEBUTTONDOWN:
                 x, y = pg.mouse.get_pos()
                 if (217 <= x <= 696) and (0 <= y <= 123):
-                    food = Food()
-                    food.Spawn(field.field)
-                    print(1)
+                    if game_start == False:
+                        game_start = True
+                    else:
+                        game_start = False
 
         
         pg.display.flip()
