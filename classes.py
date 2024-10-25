@@ -14,30 +14,53 @@ class Field:
             self.field[string][col] = segment
 
     
-    def Print(self, change_snake=True):
+    def Print(self, change_snake=True, change_food = True):
         '''
         function print field
         change_snake - will objects of Snake print like 'class.__Snake__...' (change_snake = False)
                                                 or
                         objects of Snake will printed like 'o' (change_snake = True (by default))
+        change_food - will objects of Food print like 'class.__Food__...' (change_food = False)
+                                                or
+                        objects of Food will print like 'f' (change_food = True)
         '''
         for i in self.field:
             for j in i:
                 
+                # print snake segment
                 if isinstance(j, Snake):
                     if change_snake:
                         print("o", end=" ")
                     else:
                         print(j, end=" ")
+                
+                # print food
+                elif isinstance(j, Food):
+                    if change_food:
+                        print("f", end=" ")
+                    else:
+                        print(j, end=" ")
 
                 else:
                     print(j, end=" ")
+
             print()
 
-class Apple:
+class Food:
     def __init__(self):
         self.image = food[randint(0, 1)]
+    
+    def Spawn(self, field):
+        while True:
+            string = randint(0, 14)
+            col = randint(0, 14)
+
+            if not isinstance(field[string][col], Snake):
+                field[string][col] = self
+                break
         
+
+
 class Snake:
     Segments = list()
 
