@@ -1,3 +1,8 @@
+from random import randint
+from loads.images import Apple, Pear
+
+food = (Apple, Pear)
+
 class Field:
     def __init__(self):
         self.field = [["-" for i in range(15)] for j in range(15)]
@@ -29,7 +34,10 @@ class Field:
                     print(j, end=" ")
             print()
 
-
+class Apple:
+    def __init__(self):
+        self.image = food[randint(0, 1)]
+        
 class Snake:
     Segments = list()
 
@@ -45,3 +53,5 @@ class Snake:
 
         Snake.Segments.append(self)
     
+    def Move():
+        pass
