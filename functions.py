@@ -16,8 +16,8 @@ def CreateSnake():
 def draw_snake(screen):
     for part_snake in Snake.Segments:
         if part_snake.status == "head":
-            screen.blit(SnakeHead, ())
+            screen.blit(SnakeHead, (96 + 48 * part_snake.coords[1], 160 + 48 * part_snake.coords[0]))
         elif part_snake.status == "body":
-            screen.blit(SnakeBody, ())
+            screen.blit(SnakeBody, (96 + 48 * part_snake.coords[1], 160 + 48 * part_snake.coords[0]))
         elif part_snake.status == "tail":
-            screen.blit(SnakeTail, ())
+            screen.blit(SnakeTail, (96 + 48 * part_snake.coords[1], 160 + 48 * part_snake.coords[0]))
