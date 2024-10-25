@@ -9,4 +9,3 @@ CreateSnake()
 field.UpdateField()
 
 field.Print()
-
