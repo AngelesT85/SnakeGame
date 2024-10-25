@@ -50,6 +50,13 @@ def Snake():
                     else:
                         game_start = False
 
+                        screen.blit(FieldImg, (0, 0))
+                        field = Field()
+                        CreateSnake()
+                        field.UpdateField()
+
+
+
         
         pg.display.flip()
 
