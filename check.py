@@ -2,8 +2,8 @@ from functions import *
 
 field = Field()
 
-CreateSnake(field.field)
+CreateSnake()
+field.UpdateField()
 
 field.Print()
 
-print(field.Print.__doc__)
