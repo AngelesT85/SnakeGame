@@ -1,3 +1,5 @@
 {
-    "Print Console Field": false
+    "Print Console Field": true,
+    "Snake Like 'o' ": true,
+    "Food Like 'f' ": true
 }
