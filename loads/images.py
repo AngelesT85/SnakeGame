@@ -14,3 +14,4 @@ SnakeHead = Load("snake head")
 SnakeTurn = Load("body turn")
 
 Start = Load("start")
+Restart = Load("restart")
