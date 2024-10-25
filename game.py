@@ -32,6 +32,7 @@ def Snake():
         if game_start:
             food = Food()
             food.Spawn(field.field)
+            screen.blit(Restart, (0, 0))
         else:
             screen.blit(Start, (0, 0))
 
