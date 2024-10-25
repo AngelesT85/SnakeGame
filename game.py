@@ -7,13 +7,23 @@ except:
     check_call([executable, "-m", "pip", "install", "pygame"])
 
 from loads.images import *
+from functions import *
 
 def Snake():
     pg.init()
 
+    field = Field()
+
+    CreateSnake()
+    field.UpdateField()
+
+    field.Print()
+
     screen = pg.display.set_mode((912, 912))
     screen.fill((255, 255, 255))
     screen.blit(FieldImg, (0, 0))
+
+    draw_snake()
     
     is_game = True
 
