@@ -1,4 +1,5 @@
 from classes import *
+from loads.images import *
 
 def CreateSnake():
     '''
@@ -11,3 +12,12 @@ def CreateSnake():
     }
     for row in d:
         snake = Snake((6 + row, 7), (d[row], 0))
+
+def draw_snake(screen):
+    for part_snake in Snake.Segments:
+        if part_snake.status == "head":
+            screen.blit(SnakeHead, ())
+        elif part_snake.status == "body":
+            screen.blit(SnakeBody, ())
+        elif part_snake.status == "tail":
+            screen.blit(SnakeTail, ())
