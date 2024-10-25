@@ -80,11 +80,29 @@ class Snake:
         '''
         self.status = position[0]
         self.degree = position[1]
+        self.direction = position[2]
         self.coords = coords
         Snake.Length += 1
 
         Snake.Segments.append(self)
     
-    def Move(field, ChangeCoords, IsTurn):
+    def Move(field, ChangeCoords, IsTurn, NewDire):
+        NewStr = ChangeCoords[0]
+        NewCol = ChangeCoords[1]
+
+        FirstSegment = Snake.Segments[0]
+        LastSegment = Snake.Segments.pop(-1)
+
+        LastSegment.coords = (FirstSegment.coords[0] + NewStr, FirstSegment.coords[1] + NewCol)
+        LastSegment.position[0] = "head"
+        LastSegment.position[2] = NewDire 
+
+        if IsTurn:
+            Snake.Segments[0].position[0] = "turn"
+
+            if ChangeCoords in ((1, 0), (0, -1)):
+                FirstSegment.position[1] = FirstSegment.position[1]
+
         
+
         pass
