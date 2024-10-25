@@ -101,7 +101,10 @@ class Snake:
             Snake.Segments[0].position[0] = "turn"
 
             if ChangeCoords in ((1, 0), (0, -1)):
-                FirstSegment.position[1] = FirstSegment.position[1]
+                FirstSegment.position[1] += 90
+
+            else:
+                FirstSegment.position[1] -= 90
 
         
 
