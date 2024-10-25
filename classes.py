@@ -66,23 +66,25 @@ class Food:
             if not isinstance(field[string][col], Snake):
                 field[string][col] = self
                 break
-        
-
 
 class Snake:
     Segments = list()
+    Length = 0
 
     def __init__(self, coords, position):
         '''
         function create new segment of snake (at start of the game and when eat apple)
         coords (tuple) - where on the field will appear segment of snake. (string, column)
-        position (tuple) - what kind of piece of snake (head/body/tail) and degree for the picture. ('head'/'body'/'tail', 90)
+        position (tuple) - what kind of piece of snake ('head'/'body'/'tail'/'turn'), 
+                           angle (degree) for the picture and direction of segment ('left'/'up'/'down'/'right'). (piece_of_snake, angle, direction)
         '''
         self.status = position[0]
         self.degree = position[1]
         self.coords = coords
+        Snake.Length += 1
 
         Snake.Segments.append(self)
     
-    def Move():
+    def Move(field, ChangeCoords, IsTurn):
+        
         pass
