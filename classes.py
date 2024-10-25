@@ -78,9 +78,7 @@ class Snake:
         position (tuple) - what kind of piece of snake ('head'/'body'/'tail'/'turn'), 
                            angle (degree) for the picture and direction of segment ('left'/'up'/'down'/'right'). (piece_of_snake, angle, direction)
         '''
-        self.status = position[0]
-        self.degree = position[1]
-        self.direction = position[2]
+        self.position = position
         self.coords = coords
         Snake.Length += 1
 
@@ -91,21 +89,44 @@ class Snake:
         NewCol = ChangeCoords[1]
 
         FirstSegment = Snake.Segments[0]
+
+        newstr = NewStr + FirstSegment.coords[0]
+        newcol = NewCol + FirstSegment.coords[1]
+
+        if (0 <= newstr <= 14) and (0 <= newcol <= 14):
+            if isinstance(field[newstr][newcol], Snake):
+                return False, FirstSegment.coords[0], FirstSegment.coords[1]
+
+        PreLastSegment = Snake.Segments[-2]
         LastSegment = Snake.Segments.pop(-1)
 
         LastSegment.coords = (FirstSegment.coords[0] + NewStr, FirstSegment.coords[1] + NewCol)
         LastSegment.position[0] = "head"
-        LastSegment.position[2] = NewDire 
 
+        # if turn
         if IsTurn:
             Snake.Segments[0].position[0] = "turn"
-
+            LastSegment.position[2] = NewDire
+            
             if ChangeCoords in ((1, 0), (0, -1)):
-                FirstSegment.position[1] += 90
-
+                LastSegment.position[1] += 90
+                
             else:
-                FirstSegment.position[1] -= 90
+                LastSegment.position[1] -= 90
 
+        else:
+            Snake.Segments[0].position[0] = "body"
+            LastSegment.position[1] = FirstSegment.position[1]
         
+        PreLastSegment.position[0] = "tail"
 
-        pass
+        if Snake.Segments[-3].position[0] == "turn":
+            PreLastSegment.position[1] = Snake.Segments[-3].position[1] - 90
+
+        else:
+            PreLastSegment.position[1] = Snake.Segments.position[1]
+        
+        Snake.Segments.insert(0, LastSegment)
+
+        return True
+            
