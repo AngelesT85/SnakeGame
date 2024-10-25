@@ -23,6 +23,7 @@ def Snake():
     screen = pg.display.set_mode((912, 912))
     screen.fill((255, 255, 255))
     screen.blit(FieldImg, (0, 0))
+    screen.blit(Start, (0, 0))
 
     
     is_game = True
