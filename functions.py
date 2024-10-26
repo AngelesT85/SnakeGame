@@ -15,11 +15,11 @@ def CreateSnake():
 
 def DrawSnake(screen, field):
     for part_snake in Snake.Segments:
-        if part_snake.status == "head":
+        if part_snake.position[0] == "head":
             screen.blit(SnakeHead, (96 + 48 * part_snake.coords[1], 160 + 48 * part_snake.coords[0]))
-        elif part_snake.status == "body":
+        elif part_snake.position[0] == "body":
             screen.blit(SnakeBody, (96 + 48 * part_snake.coords[1], 160 + 48 * part_snake.coords[0]))
-        elif part_snake.status == "tail":
+        elif part_snake.position[0] == "tail":
             screen.blit(SnakeTail, (96 + 48 * part_snake.coords[1], 160 + 48 * part_snake.coords[0]))
 
 def DrawFood(screen, field):
