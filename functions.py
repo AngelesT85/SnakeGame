@@ -1,6 +1,7 @@
 from classes import *
 from loads.images import *
 from pygame.transform import rotate
+from dicks import Dires
 
 def CreateSnake():
     '''
@@ -12,16 +13,14 @@ def CreateSnake():
         2: "tail"
     }
     for row in d:
-        snake = Snake([6 + row, 7], [d[row], "up"])
+        s = Snake([6 + row, 7], [d[row], "up"])
 
 def DrawSnake(screen, field, head, body, turn, tail):
     for part_snake in Snake.Segments:
 
         status = part_snake.position[0]
         x, y = part_snake.coords[1], part_snake.coords[0]
-        RotationAngle = part_snake.position[1]
-
-        global SnakeHead, SnakeBody, SnakeTurn, SnakeTail
+        RotationAngle = Dires[part_snake.position[1]][0]
 
         if status == "head":
             head = rotate(head, RotationAngle)
