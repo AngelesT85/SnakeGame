@@ -101,12 +101,13 @@ class Snake:
         newstr = NewStr + FirstSegment.coords[0]
         newcol = NewCol + FirstSegment.coords[1]
         if (newstr < 0 or newstr > 14) or (newcol < 0 or newcol > 14) or isinstance(field[newstr][newcol], Snake):
-            return False, newstr, newcol, isinstance(field[newstr][newcol], Snake)
+            return False, "die"
         
         # eat food
         elif isinstance(field[newstr][newcol], Food):
             s = Snake((newstr, newcol), ("head", FirstSegment.position[1]))
             FirstSegment.position[0] = "body"
+            return True, "eat"
 
         # just move
         else:    
@@ -144,5 +145,5 @@ class Snake:
         del Snake.Segments[-1]
         Snake.Segments.insert(0, LastSegment)
         
-        return True
+        return True, "move"
             
