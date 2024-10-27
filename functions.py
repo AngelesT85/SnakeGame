@@ -6,12 +6,12 @@ def CreateSnake():
     function create start snake on the (7, 8) (8, 8) (9, 8) coords
     '''
     d = {
-        2: "head",
+        0: "head",
         1: "body",
-        0: "tail"
+        2: "tail"
     }
     for row in d:
-        snake = Snake([8 - row, 7], [d[row], 0, "up"])
+        snake = Snake([6 + row, 7], [d[row], 0, "up"])
 
 def DrawSnake(screen, field):
     for part_snake in Snake.Segments:
@@ -21,6 +21,7 @@ def DrawSnake(screen, field):
             screen.blit(SnakeBody, (96 + 48 * part_snake.coords[1], 160 + 48 * part_snake.coords[0]))
         elif part_snake.position[0] == "tail":
             screen.blit(SnakeTail, (96 + 48 * part_snake.coords[1], 160 + 48 * part_snake.coords[0]))
+            
 
 def DrawFood(screen, field):
     for i in range(15):
