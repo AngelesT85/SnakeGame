@@ -11,10 +11,14 @@ class Field:
         '''
         function update field after snake move
         '''
+        self.field = [["-" for i in range(15)] for j in range(15)]
+
         for segment in Snake.Segments:
             string = segment.coords[0]
             col = segment.coords[1]
             self.field[string][col] = segment
+        
+        self.field[Food.coords[0]][Food.coords[1]] = Food()
 
     
     def Print(self, change_snake = True, change_food = True) -> None:
@@ -51,10 +55,12 @@ class Field:
             print()
 
 class Food:
+    coords = (0, 0)
+
     def __init__(self):
         self.image = food[randint(0, 1)]
     
-    def Spawn(self, field):
+    def Spawn(field):
         '''
         function spawn food (apple or pear) on the field
         field - field for comp (you can watch it if turn it in settings.json)
@@ -64,7 +70,8 @@ class Food:
             col = randint(0, 14)
 
             if not isinstance(field[string][col], Snake):
-                field[string][col] = self
+                field[string][col] = Food()
+                Food.coords = (string, col)
                 break
 
 class Snake:
@@ -81,7 +88,6 @@ class Snake:
         self.position = position
         self.coords = coords
         Snake.Length += 1
-
         Snake.Segments.append(self)
     
     def Move(field, ChangeCoords, IsTurn, NewDire):
@@ -90,15 +96,16 @@ class Snake:
 
         FirstSegment = Snake.Segments[0]
 
+        # check move coords
         newstr = NewStr + FirstSegment.coords[0]
         newcol = NewCol + FirstSegment.coords[1]
 
         if (0 <= newstr <= 14) and (0 <= newcol <= 14):
             if isinstance(field[newstr][newcol], Snake):
-                return False, FirstSegment.coords[0], FirstSegment.coords[1]
+                return False, newstr, newcol
 
         PreLastSegment = Snake.Segments[-2]
-        LastSegment = Snake.Segments.pop(-1)
+        LastSegment = Snake.Segments[-1]
 
         LastSegment.coords = (FirstSegment.coords[0] + NewStr, FirstSegment.coords[1] + NewCol)
         LastSegment.position[0] = "head"
@@ -114,6 +121,7 @@ class Snake:
             else:
                 LastSegment.position[1] -= 90
 
+        # if not turn 
         else:
             Snake.Segments[0].position[0] = "body"
             LastSegment.position[1] = FirstSegment.position[1]
@@ -124,8 +132,9 @@ class Snake:
             PreLastSegment.position[1] = Snake.Segments[-3].position[1] - 90
 
         else:
-            PreLastSegment.position[1] = Snake.Segments.position[1]
+            PreLastSegment.position[1] = Snake.Segments[-3].position[1]
         
+        del Snake.Segments[-1]
         Snake.Segments.insert(0, LastSegment)
 
         return True
