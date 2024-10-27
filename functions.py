@@ -24,19 +24,19 @@ def DrawSnake(screen, field, head, body, turn, tail):
         global SnakeHead, SnakeBody, SnakeTurn, SnakeTail
 
         if status == "head":
-            SnakeHead = rotate(head, RotationAngle)
+            head = rotate(head, RotationAngle)
             screen.blit(head, (96 + 48 * x, 160 + 48 * y))
 
         elif status == "body":
-            SnakeBody = rotate(body, RotationAngle)
+            body = rotate(body, RotationAngle)
             screen.blit(body, (96 + 48 * x, 160 + 48 * y))
 
         elif status == "tail":
-            SnakeTail = rotate(tail, RotationAngle)
+            tail = rotate(tail, RotationAngle)
             screen.blit(tail, (96 + 48 * x, 160 + 48 * y))
         
         elif status == "turn":
-            SnakeTurn = rotate(turn, RotationAngle)
+            turn = rotate(turn, RotationAngle)
             screen.blit(turn, (96 + 48 * x, 160 + 48 * y))
             
 
