@@ -82,15 +82,15 @@ class Snake:
         '''
         function create new segment of snake (at start of the game and when eat apple)
         coords (tuple) - where on the field will appear segment of snake. (string, column)
-        position (tuple) - what kind of piece of snake ('head'/'body'/'tail'/'turn'), 
-                           angle (degree) for the picture and direction of segment ('left'/'up'/'down'/'right'). (piece_of_snake, angle, direction)
+        position (tuple) - what kind of piece of snake ('head'/'body'/'tail'/'turn') 
+                           and direction of segment ('left'/'up'/'down'/'right'). (piece_of_snake, angle, direction)
         '''
         self.position = position
         self.coords = coords
         Snake.Length += 1
         Snake.Segments.append(self)
     
-    def Move(field, ChangeCoords, IsTurn, NewDire):
+    def Move(field, ChangeCoords, Dire):
         NewStr = ChangeCoords[0]
         NewCol = ChangeCoords[1]
 
@@ -99,43 +99,20 @@ class Snake:
         # check move coords
         newstr = NewStr + FirstSegment.coords[0]
         newcol = NewCol + FirstSegment.coords[1]
-
-        if (0 <= newstr <= 14) and (0 <= newcol <= 14):
-            if isinstance(field[newstr][newcol], Snake):
-                return False, newstr, newcol
+        if (0 <= newstr <= 14) or (0 <= newcol <= 14) or isinstance(field[newstr][newcol], Snake):
+            return False
+        
+        # eat food
+        elif isinstance(field[newstr][newcol], Food):
+            s = Snake((newstr, newcol), ("head", Snake.Segments[0].position[1]))
+            Snake.Segments[0].position[0] = "body"
+            return True
 
         PreLastSegment = Snake.Segments[-2]
         LastSegment = Snake.Segments[-1]
-
-        LastSegment.coords = (FirstSegment.coords[0] + NewStr, FirstSegment.coords[1] + NewCol)
-        LastSegment.position[0] = "head"
-
-        # if turn
-        if IsTurn:
-            Snake.Segments[0].position[0] = "turn"
-            LastSegment.position[2] = NewDire
-            
-            if ChangeCoords in ((1, 0), (0, -1)):
-                LastSegment.position[1] += 90
-                
-            else:
-                LastSegment.position[1] -= 90
-
-        # if not turn 
-        else:
-            Snake.Segments[0].position[0] = "body"
-            LastSegment.position[1] = FirstSegment.position[1]
         
-        PreLastSegment.position[0] = "tail"
+        if Dire == 
 
-        if Snake.Segments[-3].position[0] == "turn":
-            PreLastSegment.position[1] = Snake.Segments[-3].position[1] - 90
-
-        else:
-            PreLastSegment.position[1] = Snake.Segments[-3].position[1]
         
-        del Snake.Segments[-1]
-        Snake.Segments.insert(0, LastSegment)
-
         return True
             
