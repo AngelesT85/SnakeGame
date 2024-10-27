@@ -12,7 +12,7 @@ def CreateSnake():
         2: "tail"
     }
     for row in d:
-        snake = Snake([6 + row, 7], [d[row], 0, "up"])
+        snake = Snake([6 + row, 7], [d[row], "up"])
 
 def DrawSnake(screen, field, head, body, turn, tail):
     for part_snake in Snake.Segments:
