@@ -10,7 +10,7 @@ from loads.images import *
 from functions import *
 from classes import *
 
-def Snake():
+def snake():
     pg.init()
 
     field = Field()
@@ -18,6 +18,18 @@ def Snake():
     CreateSnake()
     field.UpdateField()
 
+    field.Print()
+
+    result = Snake.Move(field.field, (-1, 0), False, "d")
+    result = Snake.Move(field.field, (0, 1), True, "right")
+    # result = Snake.Move(field.field, (-1, 0), False, "d")
+    field.UpdateField()
+
+    for segment in Snake.Segments:
+        print(segment.position[0])
+
+    print(Snake.Segments)
+    print(result)
     field.Print()
 
     screen = pg.display.set_mode((912, 912))
@@ -60,4 +72,4 @@ def Snake():
         
         pg.display.flip()
 
-Snake()
+snake()
