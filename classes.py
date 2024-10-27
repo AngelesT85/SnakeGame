@@ -19,8 +19,7 @@ class Field:
             col = segment.coords[1]
             self.field[string][col] = segment
         
-        self.field[Food.coords[0]][Food.coords[1]] = Food()
-
+        Food.Spawn(self.field)
     
     def Print(self, change_snake = True, change_food = True) -> None:
         '''
@@ -56,7 +55,6 @@ class Field:
             print()
 
 class Food:
-    coords = (0, 0)
 
     def __init__(self):
         self.image = food[randint(0, 1)]
@@ -70,7 +68,7 @@ class Food:
             string = randint(0, 14)
             col = randint(0, 14)
 
-            if not isinstance(field[string][col], Snake):
+            if not isinstance(field[string][col], Snake) or not not isinstance(field[string][col], Food):
                 field[string][col] = Food()
                 Food.coords = (string, col)
                 break
@@ -78,6 +76,7 @@ class Food:
 class Snake:
     Segments = list()
     Length = 0
+    Number_food = 0
 
     def __init__(self, coords, position):
         '''
@@ -106,7 +105,10 @@ class Snake:
         # eat food
         elif isinstance(field[newstr][newcol], Food):
             s = Snake((newstr, newcol), ("head", FirstSegment.position[1]))
+            field[newstr][newcol] = "-"
             FirstSegment.position[0] = "body"
+            Snake.Number_food -= 1
+            Food.Spawn(field)
             return True, "eat"
 
         # just move
