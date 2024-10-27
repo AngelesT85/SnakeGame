@@ -24,14 +24,14 @@ def Snake():
     screen.fill((255, 255, 255))
     screen.blit(FieldImg, (0, 0))
 
+
     
     is_game = True
     game_start = False
 
     while is_game:
         if game_start:
-            food = Food()
-            food.Spawn(field.field)
+            Food.Spawn(field.field)
             screen.blit(Restart, (0, 0))
         else:
             screen.blit(Start, (0, 0))
