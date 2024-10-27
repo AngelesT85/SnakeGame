@@ -14,7 +14,7 @@ def CreateSnake():
     for row in d:
         snake = Snake([6 + row, 7], [d[row], 0, "up"])
 
-def DrawSnake(screen, field):
+def DrawSnake(screen, field, head, body, turn, tail):
     for part_snake in Snake.Segments:
 
         status = part_snake.position[0]
@@ -24,20 +24,20 @@ def DrawSnake(screen, field):
         global SnakeHead, SnakeBody, SnakeTurn, SnakeTail
 
         if status == "head":
-            SnakeHead = rotate(SnakeHead, RotationAngle)
-            screen.blit(SnakeHead, (96 + 48 * x, 160 + 48 * y))
+            SnakeHead = rotate(head, RotationAngle)
+            screen.blit(head, (96 + 48 * x, 160 + 48 * y))
 
         elif status == "body":
-            SnakeBody = rotate(SnakeBody, RotationAngle)
-            screen.blit(SnakeBody, (96 + 48 * x, 160 + 48 * y))
+            SnakeBody = rotate(body, RotationAngle)
+            screen.blit(body, (96 + 48 * x, 160 + 48 * y))
 
         elif status == "tail":
-            SnakeTail = rotate(SnakeTail, RotationAngle)
-            screen.blit(SnakeTail, (96 + 48 * x, 160 + 48 * y))
+            SnakeTail = rotate(tail, RotationAngle)
+            screen.blit(tail, (96 + 48 * x, 160 + 48 * y))
         
         elif status == "turn":
-            SnakeTurn = rotate(SnakeTurn, RotationAngle)
-            screen.blit(SnakeTurn, (96 + 48 * x, 160 + 48 * y))
+            SnakeTurn = rotate(turn, RotationAngle)
+            screen.blit(turn, (96 + 48 * x, 160 + 48 * y))
             
 
 def DrawFood(screen, field):
