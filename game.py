@@ -28,7 +28,7 @@ def snake():
     for segment in Snake.Segments:
         print(segment.position[0])
 
-    print(Snake.Segments)
+    print(Snake.Segments[0].position)
     print(result)
     field.Print()
 
@@ -41,7 +41,7 @@ def snake():
     is_game = True
     game_start = False
 
-    DrawSnake(screen, field.field)
+    DrawSnake(screen, field.field, SnakeHead, SnakeBody, SnakeTurn, SnakeTail)
 
     while is_game:
         if game_start:
@@ -70,7 +70,7 @@ def snake():
                         field.UpdateField()
                 
             elif event.type == pg.K_LEFT:
-                DrawSnake(screen, field.field)
+                DrawSnake(screen, field.field, SnakeHead, SnakeBody, SnakeTurn, SnakeTail)
 
 
 
