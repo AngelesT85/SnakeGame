@@ -1,5 +1,6 @@
 from random import randint
 from loads.images import Apple, Pear
+from dicks import Dires 
 
 food = (Apple, Pear)
 
@@ -90,29 +91,50 @@ class Snake:
         Snake.Length += 1
         Snake.Segments.append(self)
     
-    def Move(field, ChangeCoords, Dire):
-        NewStr = ChangeCoords[0]
-        NewCol = ChangeCoords[1]
+    def Move(field, Dire):
+        NewStr = Dires[Dire][1][0]
+        NewCol = Dires[Dire][1][1]
 
         FirstSegment = Snake.Segments[0]
 
         # check move coords
         newstr = NewStr + FirstSegment.coords[0]
         newcol = NewCol + FirstSegment.coords[1]
-        if (0 <= newstr <= 14) or (0 <= newcol <= 14) or isinstance(field[newstr][newcol], Snake):
-            return False
+        if (newstr < 0 or newstr > 14) or (newcol < 0 or newcol > 14) or isinstance(field[newstr][newcol], Snake):
+            return False, newstr, newcol, isinstance(field[newstr][newcol], Snake)
         
         # eat food
         elif isinstance(field[newstr][newcol], Food):
-            s = Snake((newstr, newcol), ("head", Snake.Segments[0].position[1]))
-            Snake.Segments[0].position[0] = "body"
-            return True
+            s = Snake((newstr, newcol), ("head", FirstSegment.position[1]))
+            FirstSegment.position[0] = "body"
 
-        PreLastSegment = Snake.Segments[-2]
-        LastSegment = Snake.Segments[-1]
-        
-        if Dire == 
+        # just move
+        else:    
+            PreLastSegment = Snake.Segments[-2]
+            LastSegment = Snake.Segments[-1]
 
+            LastSegment.position[0] = "head"
+            LastSegment.position[1] = Dire
+            LastSegment.coords = (newstr, newcol)
+
+            PreLastSegment.position[0] = "tail"
+            PreLastSegment.position[1] = Snake.Segments[-3].position[1]
+            
+            # not turn
+            if Dire == FirstSegment.position[1]:
+
+                FirstSegment.position[0] = "body"
+            
+            # snake turn
+            else:
+                FirstSegment.position[0] =  "turn"
+                FirstSegment.position[1] = Dire
+
+        Snake.Segments[0] = FirstSegment
+        Snake.Segments[-2] = PreLastSegment
+
+        del Snake.Segments[-1]
+        Snake.Segments.insert(0, LastSegment)
         
         return True
             
