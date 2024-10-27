@@ -28,15 +28,13 @@ def snake():
     for segment in Snake.Segments:
         print(segment.position[0])
 
-    print(Snake.Segments[0].position)
+    print(Snake.Segments[1].position)
     print(result)
     field.Print()
 
     screen = pg.display.set_mode((912, 912))
     screen.fill((255, 255, 255))
     screen.blit(FieldImg, (0, 0))
-
-
     
     is_game = True
     game_start = False
