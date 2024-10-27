@@ -15,7 +15,7 @@ def CreateSnake():
     for row in d:
         s = Snake([6 + row, 7], [d[row], "up"])
 
-def DrawSnake(screen, field, head, body, turn, tail):
+def DrawSnake(screen):
     for part_snake in Snake.Segments:
 
         status = part_snake.position[0]
@@ -23,19 +23,23 @@ def DrawSnake(screen, field, head, body, turn, tail):
         RotationAngle = Dires[part_snake.position[1]][0]
 
         if status == "head":
-            head = rotate(head, RotationAngle)
+            h = SnakeHead
+            head = rotate(h, RotationAngle)
             screen.blit(head, (96 + 48 * x, 160 + 48 * y))
 
         elif status == "body":
-            body = rotate(body, RotationAngle)
+            b = SnakeBody
+            body = rotate(b, RotationAngle)
             screen.blit(body, (96 + 48 * x, 160 + 48 * y))
 
         elif status == "tail":
-            tail = rotate(tail, RotationAngle)
+            ta = SnakeTail
+            tail = rotate(ta, RotationAngle)
             screen.blit(tail, (96 + 48 * x, 160 + 48 * y))
         
         elif status == "turn":
-            turn = rotate(turn, RotationAngle)
+            tu = SnakeTurn
+            turn = rotate(tu, RotationAngle)
             screen.blit(turn, (96 + 48 * x, 160 + 48 * y))
             
 
