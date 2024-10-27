@@ -19,9 +19,8 @@ def snake():
     field.UpdateField()
 
     field.Print()
-
     
-    result = Snake.Move(field.field, (0, 1), True, "right")
+    result = Snake.Move(field.field, "right")
     # result = Snake.Move(field.field, (-1, 0), False, "d")
     field.UpdateField()
 
@@ -48,7 +47,7 @@ def snake():
         else:
             screen.blit(Start, (0, 0))
 
-        # DrawSnake(screen, field.field)
+        DrawSnake(screen, field.field, SnakeHead, SnakeBody, SnakeTurn, SnakeTail)
         DrawFood(screen, field.field)
         for event in pg.event.get():
             if event.type == pg.QUIT:
