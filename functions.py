@@ -1,5 +1,6 @@
 from classes import *
 from loads.images import *
+from pygame.transform import rotate
 
 def CreateSnake():
     '''
@@ -15,12 +16,28 @@ def CreateSnake():
 
 def DrawSnake(screen, field):
     for part_snake in Snake.Segments:
-        if part_snake.position[0] == "head":
-            screen.blit(SnakeHead, (96 + 48 * part_snake.coords[1], 160 + 48 * part_snake.coords[0]))
-        elif part_snake.position[0] == "body":
-            screen.blit(SnakeBody, (96 + 48 * part_snake.coords[1], 160 + 48 * part_snake.coords[0]))
-        elif part_snake.position[0] == "tail":
-            screen.blit(SnakeTail, (96 + 48 * part_snake.coords[1], 160 + 48 * part_snake.coords[0]))
+
+        status = part_snake.position[0]
+        x, y = part_snake.coords[1], part_snake.coords[0]
+        RotationAngle = part_snake.position[1]
+
+        global SnakeHead, SnakeBody, SnakeTurn, SnakeTail
+
+        if status == "head":
+            SnakeHead = rotate(SnakeHead, RotationAngle)
+            screen.blit(SnakeHead, (96 + 48 * x, 160 + 48 * y))
+
+        elif status == "body":
+            SnakeBody = rotate(SnakeBody, RotationAngle)
+            screen.blit(SnakeBody, (96 + 48 * x, 160 + 48 * y))
+
+        elif status == "tail":
+            SnakeTail = rotate(SnakeTail, RotationAngle)
+            screen.blit(SnakeTail, (96 + 48 * x, 160 + 48 * y))
+        
+        elif status == "turn":
+            SnakeTurn = rotate(SnakeTurn, RotationAngle)
+            screen.blit(SnakeTurn, (96 + 48 * x, 160 + 48 * y))
             
 
 def DrawFood(screen, field):
