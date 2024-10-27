@@ -1,6 +1,6 @@
 from random import randint
 from loads.images import Apple, Pear
-from dicks import Dires 
+from dicks import * 
 
 food = (Apple, Pear)
 
@@ -128,7 +128,15 @@ class Snake:
             # snake turn
             else:
                 FirstSegment.position[0] =  "turn"
-                FirstSegment.position[1] = Dire
+                LastSegmentDire = LastSegment.position[1]
+                FirstSegmentDire = FirstSegment.position[1]
+                
+                # i dont know how it works but it works
+                if len(set(Dires[LastSegmentDire][1] + Dires[FirstSegmentDire][1])) == 2:
+                    FirstSegment.position[1] = Dire
+                
+                elif len(set(Dires[LastSegmentDire][1] + Dires[FirstSegmentDire][1])) == 3:
+                    FirstSegment.position[1] = Antonims[FirstSegment.position[1]]
 
         Snake.Segments[0] = FirstSegment
         Snake.Segments[-2] = PreLastSegment
