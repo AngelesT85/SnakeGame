@@ -24,11 +24,11 @@ class Field:
     def Print(self, change_snake = True, change_food = True) -> None:
         '''
         function print field
-        change_snake - will objects of Snake print like 'class.__Snake__...' (change_snake = False)
+        change_snake - will objects of Snake print like 'classes.Snake...' (change_snake = False)
                                                 or
                         objects of Snake will printed like 'o' (change_snake = True (by default))
 
-        change_food - will objects of Food print like 'class.__Food__...' (change_food = False)
+        change_food - will objects of Food print like 'classes.Food...' (change_food = False)
                                                 or
                         objects of Food will print like 'f' (change_food = True (by default))
         '''
