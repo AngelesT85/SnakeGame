@@ -49,7 +49,7 @@ def snake():
 
         DrawSnake(screen, field.field, SnakeHead, SnakeBody, SnakeTurn, SnakeTail)
         DrawFood(screen, field.field)
-        
+
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 is_game = False
@@ -66,11 +66,6 @@ def snake():
                         field = Field()
                         CreateSnake()
                         field.UpdateField()
-     # right left down up           
-            elif event.type == pg.KEYDOWN:
-                print(pg.KEYDOWN.key)
-
-
         
         pg.display.flip()
 
