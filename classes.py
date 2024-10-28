@@ -104,8 +104,9 @@ class Snake:
         
         # eat food
         elif isinstance(field[newstr][newcol], Food):
-            s = Snake((newstr, newcol), ("head", FirstSegment.position[1]))
-            field[newstr][newcol] = "-"
+            s = Snake([newstr, newcol], ["head", FirstSegment.position[1]])
+            LastSegment = Snake.Segments.pop(-1)
+            Snake.Segments.insert(0, LastSegment)
             FirstSegment.position[0] = "body"
             Snake.Number_food -= 1
             Food.Spawn(field)
@@ -134,11 +135,16 @@ class Snake:
                 LastSegmentDire = LastSegment.position[1]
                 FirstSegmentDire = FirstSegment.position[1]
                 
+                TuplesSum = Dires[LastSegmentDire][1] + Dires[FirstSegmentDire][1]
+
                 # i dont know how it works but it works
-                if len(set(Dires[LastSegmentDire][1] + Dires[FirstSegmentDire][1])) == 2:
-                    FirstSegment.position[1] = Dire
+                if len(set(TuplesSum)) == 2:
+                    if sorted(tuple(set(TuplesSum)))[0] == 0:
+                        FirstSegment.position[1] = Antonims[FirstSegment.position[1]]
+                    else:
+                        FirstSegment.position[1] = Dire
                 
-                elif len(set(Dires[LastSegmentDire][1] + Dires[FirstSegmentDire][1])) == 3:
+                elif len(set(TuplesSum)) == 3:
                     FirstSegment.position[1] = Antonims[FirstSegment.position[1]]
 
         Snake.Segments[0] = FirstSegment
