@@ -42,20 +42,20 @@ def snake():
 
 
     while is_game:
-        if count > 15:
-            print(count)
+        # if count > 15:
+        #     print(count)
 
         screen.blit(FieldImg, (0, 0))
         if game_start:
             screen.blit(Restart, (0, 0))
 
-            count += 1
-            if count == 15:
-                count = 0
-                #need doing code about going the snake
-                end_move = Snake.Move(field.field, "up")
-                if not end_move[0]:
-                    lose = True
+            # count += 1
+            # if count == 15:
+            #     count = 0
+            #     #need doing code about going the snake
+            #     end_move = Snake.Move(field.field, "up")
+            #     if not end_move[0]:
+            #         lose = True
 
             if Snake.Length == 225:
                 print("need doing code about winning")
