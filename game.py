@@ -48,6 +48,8 @@ def snake():
         #     print(count)
 
         screen.blit(FieldImg, (0, 0))
+        DrawSnake(screen)
+        DrawFood(screen, field.field)
         if game_start:
             screen.blit(Restart, (0, 0))
 
@@ -86,8 +88,6 @@ def snake():
                     Snake.Number_food += 1
         else:
             screen.blit(Start, (0, 0))
-        DrawSnake(screen)
-        DrawFood(screen, field.field)
 
             
         for event in pg.event.get():
