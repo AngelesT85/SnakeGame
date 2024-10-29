@@ -119,8 +119,6 @@ class Snake:
             
                 return True, "eat"
             
-
-
         # just move
         else:    
             PreLastSegment = Snake.Segments[-2]
