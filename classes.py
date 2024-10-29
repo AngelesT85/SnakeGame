@@ -71,6 +71,7 @@ class Food:
             if not isinstance(field[string][col], Snake) or not not isinstance(field[string][col], Food):
                 field[string][col] = Food()
                 Food.coords = (string, col)
+                Snake.Number_food += 1
                 break
 
 class Snake:
@@ -110,6 +111,11 @@ class Snake:
             FirstSegment.position[0] = "body"
             Snake.Number_food -= 1
             Food.Spawn(field)
+            
+            field[newstr][newcol] = "-" 
+            #если удалить строку выше, то еда после её съедения не будет исчезать, и её можно будет есть несколько раз, можешь сам попробавать и посмотреть
+
+            #ещё если съесть еду вбок, то змея не поворачивает, можешь проверить
             return True, "eat"
 
         # just move
