@@ -135,7 +135,7 @@ class Snake:
             LastSegment.coords = (newstr, newcol)
 
             PreLastSegment.position[0] = "tail"
-            PreLastSegment.position[1] = Snake.Segments[-3].position[1]
+            PreLastSegment.position[1] = Snake.Segments[-1].position[1]
             
             # not turn
             if Dire == FirstSegment.position[1]:
