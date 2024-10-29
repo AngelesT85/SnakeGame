@@ -106,6 +106,8 @@ class Snake:
         
         # eat food
         elif isinstance(field[newstr][newcol], Food):
+
+            # eat without turn
             if FirstSegment.position[1] == Dire:
                 s = Snake([newstr, newcol], ["head", FirstSegment.position[1]])
                 LastSegment = Snake.Segments.pop(-1)
@@ -116,8 +118,8 @@ class Snake:
                 Food.Spawn(field)
             
                 return True, "eat"
-            else:
-                
+            
+
 
         # just move
         else:    
@@ -146,13 +148,16 @@ class Snake:
 
                 # i dont know how it works but it works
                 if len(set(TuplesSum)) == 2:
-                    if sorted(tuple(set(TuplesSum)))[0] == 0:
-                        FirstSegment.position[1] = Antonims[FirstSegment.position[1]]
-                    else:
+                    if FirstSegment.position[1] in ("up", "down"):
                         FirstSegment.position[1] = Dire
+                    else:
+                        FirstSegment.position[1] = Antonims[FirstSegment.position[1]]
                 
                 elif len(set(TuplesSum)) == 3:
-                    FirstSegment.position[1] = Antonims[FirstSegment.position[1]]
+                    if FirstSegment.position[1] in ("left", "right"):
+                        FirstSegment.position[1] = Dire
+                    else:
+                        FirstSegment.position[1] = Antonims[FirstSegment.position[1]]
 
         Snake.Segments[0] = FirstSegment
         Snake.Segments[-2] = PreLastSegment
