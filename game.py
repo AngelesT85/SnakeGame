@@ -56,7 +56,7 @@ def snake():
 
                 
                 snake_direction = Snake.Segments[0].position[-1]
-                end_move = Snake.Move(field.field, snake_direction)
+                end_move = Snake.Move(field, snake_direction)
                 field.UpdateField()
                     
                 if not end_move[0] and end_move[1] == "die":
@@ -122,13 +122,13 @@ def snake():
                 if event.type == pg.KEYDOWN:
                     snake_direction = Snake.Segments[0].position[-1]
                     if event.key in (pg.K_LEFT, pg.K_a) and snake_direction != "right":
-                        end_move = Snake.Move(field.field, "left")
+                        end_move = Snake.Move(field, "left")
                     elif event.key in (pg.K_RIGHT, pg.K_d) and snake_direction != "left":
-                        end_move = Snake.Move(field.field, "right")
+                        end_move = Snake.Move(field, "right")
                     elif event.key in (pg.K_UP, pg.K_w) and snake_direction != "down":
-                        end_move = Snake.Move(field.field, "up")
+                        end_move = Snake.Move(field, "up")
                     elif event.key in (pg.K_DOWN, pg.K_s) and snake_direction != "up":
-                        end_move = Snake.Move(field.field, "down")
+                        end_move = Snake.Move(field, "down")
                     else:
                         end_move = (True, "None")
                     field.UpdateField()
