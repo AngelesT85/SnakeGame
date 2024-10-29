@@ -9,6 +9,7 @@ except:
 from loads.images import *
 from functions import *
 from classes import *
+from loads.settings import *
 
 def snake():
     pg.init()
@@ -56,9 +57,16 @@ def snake():
                 
                 snake_direction = Snake.Segments[0].position[-1]
                 end_move = Snake.Move(field.field, snake_direction)
+                field.UpdateField()
                     
                 if not end_move[0] and end_move[1] == "die":
                     lost = True
+
+                if PrintConsoleField:
+                    print()
+                    print()
+                    print()
+                    field.Print()
 
 
             if Snake.Length == 225:
@@ -66,7 +74,8 @@ def snake():
             
             elif lost:
                 "need doing code about defeat"
-                screen.blit(Zero, (508 + 4, 532 + 4 * 2))
+                screen.blit(Zero, (508 + 4, 536))
+                screen.blit(Zero, (508 + 4 * 2, 536))
                 screen.blit(Lose, (240, 400))
 
 
@@ -122,8 +131,12 @@ def snake():
                         end_move = Snake.Move(field.field, "down")
                     else:
                         end_move = (True, "None")
+                    field.UpdateField()
                     if not end_move[0] and end_move[1] == "die":
                         lost = True
+
+                    if PrintConsoleField:
+                        field.Print()
         
         pg.display.flip()
 
