@@ -37,7 +37,7 @@ def snake():
     
     is_game = True
     game_start = False
-    lose = False
+    lost = False
     count = 0
 
 
@@ -58,15 +58,16 @@ def snake():
                 end_move = Snake.Move(field.field, snake_direction)
                     
                 if not end_move[0] and end_move[1] == "die":
-                    lose = True
+                    lost = True
 
 
             if Snake.Length == 225:
                 print("need doing code about winning")
             
-            elif lose:
-                print("need doing code about defeat")
-
+            elif lost:
+                "need doing code about defeat"
+                screen.blit(Zero, (0, 0))
+                screen.blit(Lose, (96 + 48 * 3, 160 + 48 * 5))
 
 
             elif Snake.Number_food <= 100:
@@ -98,6 +99,7 @@ def snake():
                         field.UpdateField()
                         CreateSnake()
                         DrawSnake(screen)
+                        lost = False
             
             elif event.type == pg.KEYDOWN:
                 if game_start:
@@ -107,7 +109,7 @@ def snake():
                     if event.key == pg.K_g:
                         game_start = True
 
-            if game_start and not lose:
+            if game_start and not lost:
                 if event.type == pg.KEYDOWN:
                     snake_direction = Snake.Segments[0].position[-1]
                     if event.key in (pg.K_LEFT, pg.K_a) and snake_direction != "right":
@@ -121,7 +123,7 @@ def snake():
                     else:
                         end_move = (True, "None")
                     if not end_move[0] and end_move[1] == "die":
-                        lose = True
+                        lost = True
         
         pg.display.flip()
 
