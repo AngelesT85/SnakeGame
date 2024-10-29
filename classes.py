@@ -19,7 +19,7 @@ class Field:
             col = segment.coords[1]
             self.field[string][col] = segment
         
-        Food.Spawn(self.field)
+        self.field[Food.coords[0]][Food.coords[1]] = Food()
     
     def Print(self, change_snake = True, change_food = True) -> None:
         '''
@@ -55,6 +55,8 @@ class Field:
             print()
 
 class Food:
+
+    coords = (0, 0)
 
     def __init__(self):
         self.image = food[randint(0, 1)]
