@@ -12,14 +12,20 @@ class Field:
         '''
         function update field after snake move
         '''
-        self.field = [["-" for i in range(15)] for j in range(15)]
+        field_2 = self.field.copy()
+        self.field = [["-" for _ in range(15)] for __ in range(15)]
 
         for segment in Snake.Segments:
             string = segment.coords[0]
             col = segment.coords[1]
             self.field[string][col] = segment
+
+        for i in range(15):
+            for j in range(15):
+                if field_2[i][j] == "f":
+                    self.field[i][j] = "f"
         
-        self.field[Food.coords[0]][Food.coords[1]] = Food()
+        Food.Spawn(self.field)
     
     def Print(self, change_snake = True, change_food = True) -> None:
         '''
@@ -55,8 +61,6 @@ class Field:
             print()
 
 class Food:
-
-    coords = (0, 0)
 
     def __init__(self):
         self.image = food[randint(0, 1)]
