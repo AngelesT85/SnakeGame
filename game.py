@@ -50,23 +50,22 @@ def snake():
         if game_start:
             screen.blit(Restart, (0, 0))
 
-            count += 1
-            if count == 25:
-                count = 0 
+            # count += 1
+            # if count == 25:
+            #     count = 0 
 
-                
-                snake_direction = Snake.Segments[0].position[-1]
-                end_move = Snake.Move(field, snake_direction)
-                field.UpdateField()
+            #     snake_direction = Snake.Segments[0].position[-1]
+            #     end_move = Snake.Move(field, snake_direction)
+            #     field.UpdateField()
                     
-                if not end_move[0] and end_move[1] == "die":
-                    lost = True
+            #     if not end_move[0] and end_move[1] == "die":
+            #         lost = True
 
-                if PrintConsoleField:
-                    print()
-                    print()
-                    print()
-                    field.Print()
+            #     if PrintConsoleField:
+            #         print()
+            #         print()
+            #         print()
+            #         field.Print()
 
 
             if Snake.Length == 225:
@@ -131,6 +130,7 @@ def snake():
                         end_move = Snake.Move(field, "down")
                     else:
                         end_move = (True, "None")
+                    print(end_move)
                     field.UpdateField()
                     if not end_move[0] and end_move[1] == "die":
                         lost = True
