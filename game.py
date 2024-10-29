@@ -10,6 +10,7 @@ from loads.images import *
 from functions import *
 from classes import *
 from loads.settings import *
+from dicks import *
 
 def snake():
     pg.init()
@@ -54,29 +55,28 @@ def snake():
             # if count == 25:
             #     count = 0 
 
-            #     snake_direction = Snake.Segments[0].position[-1]
-            #     end_move = Snake.Move(field, snake_direction)
-            #     field.UpdateField()
+                # snake_direction = Snake.Segments[0].position[-1]
+                # end_move = Snake.Move(field, snake_direction)
+                # field.UpdateField()
                     
-            #     if not end_move[0] and end_move[1] == "die":
-            #         lost = True
+                # if not end_move[0] and end_move[1] == "die":
+                #     lost = True
 
-            #     if PrintConsoleField:
-            #         print()
-            #         print()
-            #         print()
-            #         field.Print()
+                # if PrintConsoleField:
+                #     print()
+                #     print()
+                #     print()
+                #     field.Print()
 
 
             if Snake.Length == 225:
                 print("need doing code about winning")
             
             elif lost:
-                "need doing code about defeat"
-                screen.blit(Zero, (508 + 4, 536))
-                screen.blit(Zero, (508 + 4 * 2, 536))
                 screen.blit(Lose, (240, 400))
-
+                score = str(Snake.Length - 3)
+                for i in range(len(score)):
+                    screen.blit(digits[score[i]], (508 + 4 * (1 + 11 * i), 536))
 
             elif Snake.Number_food <= 100:
                 chance = randint(1, 1000)
