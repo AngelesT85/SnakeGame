@@ -49,13 +49,17 @@ def snake():
         if game_start:
             screen.blit(Restart, (0, 0))
 
-            # count += 1
-            # if count == 15:
-            #     count = 0
-            #     #need doing code about going the snake
-            #     end_move = Snake.Move(field.field, "up")
-            #     if not end_move[0]:
-            #         lose = True
+            count += 1
+            if count == 25:
+                count = 0 
+
+                
+                snake_direction = Snake.Segments[0].position[-1]
+                end_move = Snake.Move(field.field, snake_direction)
+                    
+                if not end_move[0] and end_move[1] == "die":
+                    lose = True
+
 
             if Snake.Length == 225:
                 print("need doing code about winning")
@@ -64,10 +68,11 @@ def snake():
                 print("need doing code about defeat")
 
 
+
             elif Snake.Number_food <= 100:
                 chance = randint(1, 1000)
 
-                if chance in (250, 500, 750):
+                if chance in (250, 750):
                     Food.Spawn(field.field)
                     Snake.Number_food += 1
         else:
@@ -104,25 +109,19 @@ def snake():
 
             if game_start and not lose:
                 if event.type == pg.KEYDOWN:
-                    if event.key in (pg.K_LEFT, pg.K_a):
+                    snake_direction = Snake.Segments[0].position[-1]
+                    if event.key in (pg.K_LEFT, pg.K_a) and snake_direction != "right":
                         end_move = Snake.Move(field.field, "left")
-                        if not end_move[0]:
-                            lose = True
-
-                    elif event.key in (pg.K_RIGHT, pg.K_d):
+                    elif event.key in (pg.K_RIGHT, pg.K_d) and snake_direction != "left":
                         end_move = Snake.Move(field.field, "right")
-                        if not end_move[0]:
-                            lose = True
-
-                    elif event.key in (pg.K_UP, pg.K_w):
+                    elif event.key in (pg.K_UP, pg.K_w) and snake_direction != "down":
                         end_move = Snake.Move(field.field, "up")
-                        if not end_move[0]:
-                            lose = True
-
-                    elif event.key in (pg.K_DOWN, pg.K_s):
+                    elif event.key in (pg.K_DOWN, pg.K_s) and snake_direction != "up":
                         end_move = Snake.Move(field.field, "down")
-                        if not end_move[0]:
-                            lose = True
+                    else:
+                        end_move = (True, "None")
+                    if not end_move[0] and end_move[1] == "die":
+                        lose = True
         
         pg.display.flip()
 
