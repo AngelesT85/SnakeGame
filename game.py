@@ -131,7 +131,6 @@ def snake():
                     else:
                         end_move = (True, "None")
                     print(end_move)
-                    field.UpdateField()
                     if not end_move[0] and end_move[1] == "die":
                         lost = True
 
