@@ -111,7 +111,7 @@ class Snake:
             FirstSegment.position[0] = "body"
             Snake.Number_food -= 1
             Food.Spawn(field)
-            
+
             field[newstr][newcol] = "-" 
             #если удалить строку выше, то еда после её съедения не будет исчезать, и её можно будет есть несколько раз, можешь сам попробавать и посмотреть
 
