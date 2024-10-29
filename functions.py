@@ -12,6 +12,7 @@ def CreateSnake():
         1: "body",
         2: "tail"
     }
+    Snake.Segments.clear()
     for row in d:
         s = Snake([6 + row, 7], [d[row], "up"])
 
