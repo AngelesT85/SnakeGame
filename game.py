@@ -66,8 +66,8 @@ def snake():
             
             elif lost:
                 "need doing code about defeat"
-                screen.blit(Zero, (0, 0))
-                screen.blit(Lose, (96 + 48 * 3, 160 + 48 * 5))
+                screen.blit(Zero, (508 + 4, 532 + 4 * 2))
+                screen.blit(Lose, (240, 400))
 
 
             elif Snake.Number_food <= 100:
