@@ -15,3 +15,9 @@ SnakeTurn = Load("body turn")
 
 Start = Load("start")
 Restart = Load("restart")
+
+Lose = Load("lose")
+
+Zero = Load("zero")
+One = Load("one")
+Two = Load("two")
