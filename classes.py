@@ -91,7 +91,8 @@ class Snake:
         Snake.Length += 1
         Snake.Segments.append(self)
     
-    def Move(field, Dire):
+    def Move(Field, Dire):
+        field = Field.field
         NewStr = Dires[Dire][1][0]
         NewCol = Dires[Dire][1][1]
 
@@ -105,18 +106,18 @@ class Snake:
         
         # eat food
         elif isinstance(field[newstr][newcol], Food):
-            s = Snake([newstr, newcol], ["head", FirstSegment.position[1]])
-            LastSegment = Snake.Segments.pop(-1)
-            Snake.Segments.insert(0, LastSegment)
-            FirstSegment.position[0] = "body"
-            Snake.Number_food -= 1
-            Food.Spawn(field)
+            if FirstSegment.position[1] == Dire:
+                s = Snake([newstr, newcol], ["head", FirstSegment.position[1]])
+                LastSegment = Snake.Segments.pop(-1)
+                Snake.Segments.insert(0, LastSegment)
+                FirstSegment.position[0] = "body"
+                Snake.Number_food -= 1
+                Field.UpdateField()
+                Food.Spawn(field)
             
-            field[newstr][newcol] = "-" 
-            #если удалить строку выше, то еда после её съедения не будет исчезать, и её можно будет есть несколько раз, можешь сам попробавать и посмотреть
-
-            #ещё если съесть еду вбок, то змея не поворачивает, можешь проверить
-            return True, "eat"
+                return True, "eat"
+            else:
+                
 
         # just move
         else:    
