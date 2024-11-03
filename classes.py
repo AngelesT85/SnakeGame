@@ -123,6 +123,10 @@ class Snake:
                 Snake.Number_food -= 1
                 Field.UpdateField()
                 Food.Spawn(field)
+                for i in range(len(Food.Segments)):
+                    if Food.Segments[i][0] == newstr and Food.Segments[i][1] == newcol:
+                        del Food.Segments[i]
+                        break
             
                 return True, "eat"
             
