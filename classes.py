@@ -135,7 +135,20 @@ class Snake:
             LastSegment.coords = (newstr, newcol)
 
             PreLastSegment.position[0] = "tail"
-            PreLastSegment.position[1] = Snake.Segments[-1].position[1]
+
+            if Snake.Segments[-3].position[1] in "body head" :
+                PreLastSegment.position[1] = Snake.Segments[-3].position[1]
+
+            elif Snake.Segments[-3].position[1] == "turn":
+                Pre2LastSegment = Snake.Segments[-3]
+                Pre2LastCoords = Pre2LastSegment.position[0]
+                PreLastCoords = PreLastSegment.position[0]
+
+                diffrent = (Pre2LastCoords[0] - PreLastCoords[0], Pre2LastCoords[1] - PreLastCoords[1])
+
+                PreLastSegment.position[1] = idk[diffrent, Pre2LastSegment.position[1]]
+
+
             
             # not turn
             if Dire == FirstSegment.position[1]:
