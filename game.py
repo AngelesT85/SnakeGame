@@ -19,6 +19,7 @@ def snake():
 
     CreateSnake()
     field.UpdateField()
+    Food.Spawn(field.field)
 
     #field.Print()
     
@@ -133,13 +134,11 @@ def snake():
                     print(end_move)
                     if not end_move[0] and end_move[1] == "die":
                         lost = True
-                    elif end_move[0] and end_move[1] == "eat":
-                        Food.Spawn(field.field)
+
+                    field.UpdateField()
 
                     if PrintConsoleField:
                         field.Print()
-                    
-                    field.UpdateField()
         
         pg.display.flip()
 
