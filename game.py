@@ -136,6 +136,8 @@ def snake():
 
                     if PrintConsoleField:
                         field.Print()
+                    
+                    field.UpdateField()
         
         pg.display.flip()
 
