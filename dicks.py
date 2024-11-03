@@ -26,3 +26,17 @@ digits = {
     "8": Eight,
     "9": Nine
 }
+
+idk = {
+    ((1, 0), "up"): "down",
+    ((0, 1), "up"): "right",
+
+    ((0, 1), "left"): "right",
+    ((-1, 0), "left"): "up",
+
+    ((-1, 0), "down"): "up",
+    ((0, -1), "down"): "left",
+
+    ((0, -1), "right"): "left",
+    ((1, 0), "right"): "down"
+}
