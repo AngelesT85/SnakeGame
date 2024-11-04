@@ -17,6 +17,7 @@ Start = Load("start")
 Restart = Load("restart")
 
 Lose = Load("lose")
+Win = Load("win")
 
 Zero = Load("zero")
 One = Load("one")
