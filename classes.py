@@ -77,7 +77,7 @@ class Food:
             if not isinstance(field[string][col], Snake) or not not isinstance(field[string][col], Food):
                 field[string][col] = Food()
                 Food.Segments.append((string, col, field[string][col]))
-                Food.coords = (string, col)
+                #Food.coords = (string, col)
                 Snake.Number_food += 1
                 break
 
@@ -188,4 +188,3 @@ class Snake:
         Snake.Segments.insert(0, LastSegment)
         
         return True, "move"
-            
