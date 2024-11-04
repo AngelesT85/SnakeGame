@@ -49,8 +49,9 @@ def snake():
         #     print(count)
 
         screen.blit(FieldImg, (0, 0))
+        field.UpdateField()
         DrawSnake(screen)
-        DrawFood(screen, field.field)
+        DrawFood(screen)
         if game_start:
             screen.blit(Restart, (0, 0))
 
@@ -73,7 +74,8 @@ def snake():
 
 
             if Snake.Length == 225:
-                print("need doing code about winning")
+                screen.blit(Win, (240, 304))
+                
             
             elif lost:
                 screen.blit(Lose, (240, 400))
@@ -87,6 +89,9 @@ def snake():
                 if chance in (250, 750):
                     Food.Spawn(field.field)
                     Snake.Number_food += 1
+
+                    if PrintConsoleField:
+                        field.Print()
         else:
             screen.blit(Start, (0, 0))
 
@@ -102,13 +107,18 @@ def snake():
                         game_start = True
                     else:
                         game_start = False
+                        lost = False
 
                         screen.blit(FieldImg, (0, 0))
+                        
+                        Food.Segments.clear()
                         field = Field()
-                        field.UpdateField()
                         CreateSnake()
+                        field.UpdateField()
+                        Food.Spawn(field.field)
+
                         DrawSnake(screen)
-                        lost = False
+                        DrawFood(screen)
             
             elif event.type == pg.KEYDOWN:
                 if game_start:
