@@ -13,6 +13,7 @@ def CreateSnake():
         2: "tail"
     }
     Snake.Segments.clear()
+    Snake.Length = 0
     for row in d:
         s = Snake([6 + row, 7], [d[row], "up"])
 
@@ -44,11 +45,9 @@ def DrawSnake(screen):
             screen.blit(turn, (96 + 48 * x, 160 + 48 * y))
             
 
-def DrawFood(screen, field):
-    for i in range(15):
-        for j in range(15):
-            if type(field[i][j]) == Food:
-                screen.blit(field[i][j].image, (96 + 48 * j, 160 + 48 * i))
+def DrawFood(screen):
+    for i in Food.Segments:
+        screen.blit(i[2].image, (96 + 48 * i[1], 160 + 48 * i[0]))
 
 
     
