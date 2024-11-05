@@ -132,7 +132,6 @@ class Snake:
             
         # just move
         else:
-            print(2)
             PreLastSegment = Snake.Segments[-2]
             LastSegment = Snake.Segments[-1]
 
@@ -143,12 +142,10 @@ class Snake:
             PreLastSegment.position[0] = "tail"
 
             if Snake.Segments[-3].position[0] in ("body", "head") :
-                print(1)
                 PreLastSegment.position[1] = Snake.Segments[-3].position[1]
 
 
             elif Snake.Segments[-3].position[0] == "turn":
-                print(3)
                 Pre2LastSegment = Snake.Segments[-3]
                 Pre2LastCoords = Pre2LastSegment.coords
                 PreLastCoords = PreLastSegment.coords
