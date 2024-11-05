@@ -58,6 +58,10 @@ class Field:
                     print(j, end=" ")
 
             print()
+        
+        print()
+        print()
+        print()
 
 class Food:
     Segments = list()
