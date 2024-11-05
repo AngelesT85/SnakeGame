@@ -78,7 +78,7 @@ class Food:
             string = randint(0, 14)
             col = randint(0, 14)
 
-            if not isinstance(field[string][col], Snake) or not isinstance(field[string][col], Food):
+            if type(field[string][col]) not in (Snake, Food):
                 field[string][col] = Food()
                 Food.Segments.append((string, col, field[string][col]))
                 #Food.coords = (string, col)
