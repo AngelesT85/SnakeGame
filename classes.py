@@ -118,21 +118,49 @@ class Snake:
         # eat food
         elif isinstance(field[newstr][newcol], Food):
 
+            s = Snake([newstr, newcol], ["head", FirstSegment.position[1]])
+            LastSegment = Snake.Segments.pop(-1)
+            Snake.Segments.insert(0, LastSegment)
+
+            Snake.Number_food -= 1
+            Field.UpdateField()
+            Food.Spawn(field)
+
+            for i in range(len(Food.Segments)):
+                if Food.Segments[i][0] == newstr and Food.Segments[i][1] == newcol:
+                    del Food.Segments[i]
+                    break
+
             # eat without turn
             if FirstSegment.position[1] == Dire:
-                s = Snake([newstr, newcol], ["head", FirstSegment.position[1]])
-                LastSegment = Snake.Segments.pop(-1)
-                Snake.Segments.insert(0, LastSegment)
                 FirstSegment.position[0] = "body"
-                Snake.Number_food -= 1
-                Field.UpdateField()
-                Food.Spawn(field)
-                for i in range(len(Food.Segments)):
-                    if Food.Segments[i][0] == newstr and Food.Segments[i][1] == newcol:
-                        del Food.Segments[i]
-                        break
             
-                return True, "eat"
+            # eat with turn
+            else:
+                LastSegment.position[0] = "head"
+                LastSegment.position[1] = Dire
+                LastSegment.coords = (newstr, newcol)
+
+                FirstSegment.position[0] =  "turn"
+                LastSegmentDire = LastSegment.position[1]
+                FirstSegmentDire = FirstSegment.position[1]
+                
+                TuplesSum = Dires[LastSegmentDire][1] + Dires[FirstSegmentDire][1]
+
+                # i dont know how it works but it works
+                if len(set(TuplesSum)) == 2:
+                    if FirstSegment.position[1] in ("up", "down"):
+                        FirstSegment.position[1] = Dire
+                    else:
+                        FirstSegment.position[1] = Antonims[FirstSegment.position[1]]
+                
+                elif len(set(TuplesSum)) == 3:
+                    if FirstSegment.position[1] in ("left", "right"):
+                        FirstSegment.position[1] = Dire
+                    else:
+                        FirstSegment.position[1] = Antonims[FirstSegment.position[1]]
+                
+            return True, "eat"
             
         # just move
         else:
