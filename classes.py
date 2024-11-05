@@ -91,7 +91,7 @@ class Snake:
         function create new segment of snake (at start of the game and when eat apple)
         coords (tuple) - where on the field will appear segment of snake. (string, column)
         position (tuple) - what kind of piece of snake ('head'/'body'/'tail'/'turn') 
-                           and direction of segment ('left'/'up'/'down'/'right'). (piece_of_snake, angle, direction)
+                           and direction of segment ('left'/'up'/'down'/'right'). (piece_of_snake, direction)
         '''
         self.position = position
         self.coords = coords
@@ -131,7 +131,8 @@ class Snake:
                 return True, "eat"
             
         # just move
-        else:    
+        else:
+            print(2)
             PreLastSegment = Snake.Segments[-2]
             LastSegment = Snake.Segments[-1]
 
@@ -141,18 +142,20 @@ class Snake:
 
             PreLastSegment.position[0] = "tail"
 
-            if Snake.Segments[-3].position[1] in "body head" :
+            if Snake.Segments[-3].position[0] in ("body", "head") :
+                print(1)
                 PreLastSegment.position[1] = Snake.Segments[-3].position[1]
 
-            elif Snake.Segments[-3].position[1] == "turn":
+
+            elif Snake.Segments[-3].position[0] == "turn":
+                print(3)
                 Pre2LastSegment = Snake.Segments[-3]
-                Pre2LastCoords = Pre2LastSegment.position[0]
-                PreLastCoords = PreLastSegment.position[0]
+                Pre2LastCoords = Pre2LastSegment.coords
+                PreLastCoords = PreLastSegment.coords
 
                 diffrent = (Pre2LastCoords[0] - PreLastCoords[0], Pre2LastCoords[1] - PreLastCoords[1])
 
                 PreLastSegment.position[1] = idk[diffrent, Pre2LastSegment.position[1]]
-
 
             
             # not turn
