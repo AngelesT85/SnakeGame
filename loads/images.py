@@ -29,3 +29,6 @@ Six = Load("six")
 Seven = Load("seven")
 Eight = Load("eight")
 Nine = Load("nine")
+
+PauseOff = Load("pause_off")
+PauseOn = Load("pause_on")
