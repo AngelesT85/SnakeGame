@@ -21,19 +21,6 @@ def snake():
     field.UpdateField()
     Food.Spawn(field.field)
 
-    #field.Print()
-    
-    #result = Snake.Move(field.field, "up")
-    
-    #field.UpdateField()
-
-    #for segment in Snake.Segments:
-    #    print(segment.position[0])
-
-    #print(Snake.Segments[1].position)
-    #print(result)
-    #field.Print()
-
     screen = pg.display.set_mode((912, 912))
     screen.fill((255, 255, 255))
     screen.blit(FieldImg, (0, 0))
@@ -42,40 +29,52 @@ def snake():
     game_start = False
     lost = False
     count = 0
+    speed = int(30 / SpeedModifier)
+    pause = False
+
+    if SpeedModifier > 1:
+        speed += 1
 
 
     while is_game:
-        # if count > 15:
-        #     print(count)
-
+        
         screen.blit(FieldImg, (0, 0))
         field.UpdateField()
         DrawSnake(screen)
         DrawFood(screen)
+
+        if pause == True:
+            screen.blit(PauseOn, (0, 0))
+        else:
+            screen.blit(PauseOff, (0, 0))
+
+        
         if game_start:
             screen.blit(Restart, (0, 0))
 
-            # count += 1
-            # if count == 25:
-            #     count = 0 
+            if pause == False:
+                count += 1
 
-                # snake_direction = Snake.Segments[0].position[-1]
-                # end_move = Snake.Move(field, snake_direction)
-                # field.UpdateField()
+            if not lost and count == speed and pause == False:
+                count = 0 
+
+                snake_direction = Snake.Segments[0].position[-1]
+                end_move = Snake.Move(field, snake_direction)
+                field.UpdateField()
                     
-                # if not end_move[0] and end_move[1] == "die":
-                #     lost = True
+                if not end_move[0] and end_move[1] == "die":
+                    lost = True
 
-                # if PrintConsoleField:
-                #     print()
-                #     print()
-                #     print()
-                #     field.Print()
+                if PrintConsoleField and not lost:
+                    print()
+                    print()
+                    print()
+                    field.Print()
 
 
             if Snake.Length == 225:
                 screen.blit(Win, (240, 304))
-                
+                lost = True
             
             elif lost:
                 screen.blit(Lose, (240, 400))
@@ -83,14 +82,14 @@ def snake():
                 for i in range(len(score)):
                     screen.blit(digits[score[i]], (508 + 4 * (1 + 11 * i), 536))
 
-            elif Snake.Number_food <= 100:
+            elif Snake.Number_food <= 100 and pause == False:
                 chance = randint(1, 1000)
 
                 if chance in (250, 750):
                     Food.Spawn(field.field)
                     Snake.Number_food += 1
 
-                    if PrintConsoleField:
+                    if PrintConsoleField and not lost:
                         field.Print()
         else:
             screen.blit(Start, (0, 0))
@@ -106,8 +105,11 @@ def snake():
                     if game_start == False:
                         game_start = True
                     else:
+
                         game_start = False
                         lost = False
+                        pause = False
+                        count = 0
 
                         screen.blit(FieldImg, (0, 0))
                         
@@ -119,16 +121,46 @@ def snake():
 
                         DrawSnake(screen)
                         DrawFood(screen)
+
+
+                elif lost == False and (x**2 - 49**2) + (y**2 - 49**2) <= 90**2:
+                    if pause:
+                        pause = False
+                    else:
+                        pause = True
             
             elif event.type == pg.KEYDOWN:
-                if game_start:
+                if event.key == pg.K_ESCAPE:
+                    if pause and lost == False:
+                        pause = False
+                    elif lost == False:
+                        pause = True
+
+                if game_start and pause == False:
                     if event.key == pg.K_r:
+
                         game_start = False
+                        lost = False
+                        pause = False
+                        count = 0
+
+                        screen.blit(FieldImg, (0, 0))
+                        
+                        Food.Segments.clear()
+                        field = Field()
+                        CreateSnake()
+                        field.UpdateField()
+                        Food.Spawn(field.field)
+
+                        DrawSnake(screen)
+                        DrawFood(screen)
+
                 else:
                     if event.key == pg.K_g:
                         game_start = True
 
-            if game_start and not lost:
+
+            if game_start and not lost and pause == False:
                 if event.type == pg.KEYDOWN:
                     snake_direction = Snake.Segments[0].position[-1]
                     if event.key in (pg.K_LEFT, pg.K_a) and snake_direction != "right":
