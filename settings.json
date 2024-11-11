@@ -1,5 +1,6 @@
 {
     "Print Console Field": true,
     "Snake Like 'o' ": true,
-    "Food Like 'f' ": true
+    "Food Like 'f' ": true,
+    "Speed Modifier": 1
 }
