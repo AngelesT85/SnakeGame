@@ -18,6 +18,9 @@ def CreateSnake():
         s = Snake([6 + row, 7], [d[row], "up"])
 
 def DrawSnake(screen):
+    '''
+    function draw snake on the pygame window
+    '''
     for part_snake in Snake.Segments:
 
         status = part_snake.position[0]
@@ -44,8 +47,10 @@ def DrawSnake(screen):
             turn = rotate(tu, RotationAngle)
             screen.blit(turn, (96 + 48 * x, 160 + 48 * y))
             
-
 def DrawFood(screen):
+    '''
+    function draw eat on the pygame window
+    '''
     for i in Food.Segments:
         screen.blit(i[2].image, (96 + 48 * i[1], 160 + 48 * i[0]))
 
