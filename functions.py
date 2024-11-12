@@ -53,6 +53,3 @@ def DrawFood(screen):
     '''
     for i in Food.Segments:
         screen.blit(i[2].image, (96 + 48 * i[1], 160 + 48 * i[0]))
-
-
-    
