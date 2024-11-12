@@ -24,8 +24,6 @@ class Field:
             col = segment[1]
             self.field[string][col] = segment[2]
 
-        
-    
     def Print(self, change_snake = True, change_food = True) -> None:
         '''
         function print field
@@ -103,6 +101,9 @@ class Snake:
         Snake.Segments.append(self)
     
     def Move(Field, Dire):
+        '''
+        function is responsible for the movement of the snake in a certain direction, including eating food
+        '''
         field = Field.field
         NewStr = Dires[Dire][1][0]
         NewCol = Dires[Dire][1][1]
