@@ -29,7 +29,10 @@ def snake():
     game_start = False
     lost = False
     count = 0
-    speed = int(30 / SpeedModifier)
+    if SpeedModifier == 0:
+        speed = -1
+    else: 
+        speed = int(30 / abs(SpeedModifier))
     pause = False
 
     if SpeedModifier > 1:
@@ -173,7 +176,7 @@ def snake():
                         end_move = Snake.Move(field, "down")
                     else:
                         end_move = (True, "None")
-                    #print(end_move)
+
                     if not end_move[0] and end_move[1] == "die":
                         lost = True
 
