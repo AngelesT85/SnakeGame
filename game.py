@@ -126,7 +126,7 @@ def snake():
                         DrawFood(screen)
 
 
-                elif lost == False and (x**2 - 49**2) + (y**2 - 49**2) <= 90**2:
+                elif lost == False and (x - 49)**2 + (y - 49)**2 <= 49**2:
                     if pause:
                         pause = False
                     else:
